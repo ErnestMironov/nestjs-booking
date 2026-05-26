@@ -48,7 +48,11 @@ export class BookingsService {
     });
 
     try {
-      return await this.bookingRepository.save(booking);
+      const saved = await this.bookingRepository.save(booking);
+      return (await this.bookingRepository.findOne({
+        where: { id: saved.id },
+        relations: { workshop: true },
+      })) as Booking;
     } catch (err) {
       if (
         err instanceof QueryFailedError &&
