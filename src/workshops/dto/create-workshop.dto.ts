@@ -1,4 +1,5 @@
 import { IsString, IsDateString, IsInt, Min, MinLength, IsUrl, IsOptional } from 'class-validator';
+import { IsFutureDate } from '../../common/validators/is-future-date.validator';
 
 export class CreateWorkshopDto {
   @IsString()
@@ -11,6 +12,7 @@ export class CreateWorkshopDto {
 
   /** Дата проведения мастер-класса в формате ISO 8601 */
   @IsDateString()
+  @IsFutureDate()
   date: string;
 
   /** Максимальное количество участников */
