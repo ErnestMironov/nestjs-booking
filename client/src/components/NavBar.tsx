@@ -25,18 +25,20 @@ export default function NavBar() {
             <span className="text-sm text-gray-600">{user.email}</span>
             {user.role === 'admin' && (
               <Link
-                href="/admin"
+                href="/admin/workshops"
                 className="text-sm text-purple-600 hover:text-purple-700 font-medium"
               >
                 Админ
               </Link>
             )}
-            <Link
-              href="/my-bookings"
-              className="text-sm text-gray-700 hover:text-blue-600"
-            >
-              Мои записи
-            </Link>
+            {user.role !== 'admin' && (
+              <Link
+                href="/my-bookings"
+                className="text-sm text-gray-700 hover:text-blue-600"
+              >
+                Мои записи
+              </Link>
+            )}
             <button
               onClick={handleLogout}
               className="text-sm bg-gray-100 text-gray-700 px-3 py-1.5 rounded-lg hover:bg-gray-200 transition"
