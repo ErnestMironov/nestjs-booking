@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
 import { WorkshopsModule } from './workshops/workshops.module';
+import { BookingsModule } from './bookings/bookings.module';
+import { SeederModule } from './seeder/seeder.module';
 import { User } from './entities/user.entity';
 import { Workshop } from './entities/workshop.entity';
 import { Booking } from './entities/booking.entity';
-import { BookingsModule } from './bookings/bookings.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { BookingsModule } from './bookings/bookings.module';
     AuthModule,
     WorkshopsModule,
     BookingsModule,
+    SeederModule,
   ],
 })
 export class AppModule {}
