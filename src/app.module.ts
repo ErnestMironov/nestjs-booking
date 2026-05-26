@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from './auth/auth.module';
+import { WorkshopsModule } from './workshops/workshops.module';
 import { User } from './entities/user.entity';
 import { Workshop } from './entities/workshop.entity';
 import { Booking } from './entities/booking.entity';
@@ -14,6 +15,7 @@ import { Booking } from './entities/booking.entity';
       synchronize: true,
     }),
     AuthModule,
+    WorkshopsModule,
   ],
 })
 export class AppModule {}

@@ -26,6 +26,10 @@ export class Workshop {
   @Column()
   capacity: number;
 
+  /** Ссылка на обложку мастер-класса (опционально) */
+  @Column({ nullable: true, type: 'varchar' })
+  imageUrl: string | null;
+
   @CreateDateColumn()
   createdAt: Date;
 

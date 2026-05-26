@@ -4,9 +4,11 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { api } from '@/lib/api';
+import { useAuth } from '@/context/AuthContext';
 
 export default function LoginPage() {
   const router = useRouter();
+  const auth = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,7 +23,7 @@ export default function LoginPage() {
         '/auth/login',
         { email, password },
       );
-      localStorage.setItem('token', data.access_token);
+      auth.login(data.access_token);
       router.push('/');
     } catch (err: unknown) {
       setError(err instanceof Error ? err.message : 'Ошибка');
