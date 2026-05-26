@@ -56,7 +56,7 @@ export class BookingsService {
     } catch (err) {
       if (
         err instanceof QueryFailedError &&
-        (err as any).message?.toLowerCase().includes('unique')
+        err.message.toLowerCase().includes('unique')
       ) {
         throw new ConflictException('Вы уже записаны на этот мастер-класс');
       }
