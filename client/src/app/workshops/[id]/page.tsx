@@ -22,6 +22,9 @@ export default function WorkshopDetailPage() {
   const [workshop, setWorkshop] = useState<Workshop | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
+  const [bookingError, setBookingError] = useState('');
 
   useEffect(() => {
     api
@@ -110,12 +113,29 @@ export default function WorkshopDetailPage() {
 
         {user ? (
           workshop.spotsLeft > 0 ? (
-            <button
-              onClick={() => alert('Скоро')}
-              className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition font-medium"
-            >
-              Записаться
-            </button>
+            <div>
+              <button
+                onClick={async () => {
+                  setBookingLoading(true);
+                  setBookingError('');
+                  try {
+                    await api.post('/bookings', { workshopId: workshop.id });
+                    setBookingSuccess(true);
+                  } catch (err: unknown) {
+                    setBookingError(err instanceof Error ? err.message : 'Ошибка при записи');
+                  } finally {
+                    setBookingLoading(false);
+                  }
+                }}
+                disabled={bookingLoading || bookingSuccess}
+                className="w-full bg-blue-600 text-white py-2.5 rounded-lg hover:bg-blue-700 transition font-medium disabled:opacity-60 disabled:cursor-not-allowed"
+              >
+                {bookingLoading ? 'Загрузка...' : bookingSuccess ? 'Вы записаны!' : 'Записаться'}
+              </button>
+              {bookingError && (
+                <p className="mt-2 text-sm text-red-600 text-center">{bookingError}</p>
+              )}
+            </div>
           ) : (
             <div className="w-full text-center bg-gray-100 text-gray-500 py-2.5 rounded-lg font-medium">
               Мест нет

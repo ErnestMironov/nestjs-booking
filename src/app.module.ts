@@ -5,6 +5,7 @@ import { WorkshopsModule } from './workshops/workshops.module';
 import { User } from './entities/user.entity';
 import { Workshop } from './entities/workshop.entity';
 import { Booking } from './entities/booking.entity';
+import { BookingsModule } from './bookings/bookings.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { Booking } from './entities/booking.entity';
     }),
     AuthModule,
     WorkshopsModule,
+    BookingsModule,
   ],
 })
 export class AppModule {}
